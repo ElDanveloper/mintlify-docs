@@ -63,13 +63,11 @@
   },
   "contextual": {
     "options": [
-     "view",
-     "vscode"
    ]
   },
   "footer": {
     "socials": {
-      "github": "https://app.hunno.com.br"
+      "github": "https://github.com/marciopollo/hunnocrm-api-node"
     }
   }
 }
