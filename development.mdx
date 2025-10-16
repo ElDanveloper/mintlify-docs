@@ -13,47 +13,47 @@ description: 'Guia passo a passo para configurar e executar a API Hunno CRM em u
 Siga os passos abaixo para clonar, configurar e executar o projeto localmente.
 
 <Steps>
-<Step title="Clone o Repositório">
+  <Step title="1. Clone o Repositório">
+    Use o Git para baixar o código-fonte do projeto.
+    ```bash
+    git clone [https://github.com/marciopollo/hunnocrm-api-node](https://github.com/marciopollo/hunnocrm-api-node)
+    ```
+  </Step>
 
-```bash
-git clone https://github.com/marciopollo/hunnocrm-api-node
-```
-</Step>
+  <Step title="2. Acesse o Diretório">
+    Navegue até a pasta do projeto que foi criada.
+    ```bash
+    cd hunnocrm-api-node
+    ```
+  </Step>
 
-<Step title="Acesse o Diretório">
+  <Step title="3. Instale as Dependências">
+    Execute o comando para instalar todas as bibliotecas e pacotes que a API necessita.
+    ```bash
+    npm install
+    ```
+  </Step>
 
-Navegue até a pasta do projeto que foi criada.
+  <Step title="4. Configure as Variáveis de Ambiente">
+    O projeto precisa de um arquivo `.env` para informações sensíveis. Copie o arquivo de exemplo para criar o seu.
+    ```bash
+    cp .env.example .env
+    ```
+    Após copiar, abra o arquivo `.env` e preencha a variável `DATABASE_URL` com a string de conexão do seu banco de dados PostgreSQL.
+  </Step>
 
-```bash
-cd hunnocrm-api-node
-```
-</Step>
+  <Step title="5. Execute as Migrações do Banco de Dados">
+    Este comando irá criar todas as tabelas necessárias no seu banco de dados.
+    ```bash
+    npm run migrate:dev
+    ```
+  </Step>
+
+  <Step title="6. Inicie o Servidor de Desenvolvimento">
+    Com tudo configurado, execute o comando para iniciar a API.
+    ```bash
+    npm run dev
+    ```
+    O servidor será iniciado, geralmente na porta `3333`.
+  </Step>
 </Steps>
-
-<Step title="Instale as Dependências"> Execute o comando abaixo para instalar todas as bibliotecas e pacotes que a API necessita para funcionar.
-
-Bash
-
-npm install
-</Step>
-
-<Step title="Configure as Variáveis de Ambiente"> O projeto precisa de um arquivo .env para armazenar informações sensíveis, como a conexão com o banco de dados. Copie o arquivo de exemplo para criar o seu.
-
-Bash
-
-cp .env.example .env
-Após copiar, abra o arquivo .env com um editor de texto e preencha a variável DATABASE_URL com a string de conexão do seu banco de dados PostgreSQL. </Step>
-
-<Step title="Execute as Migrações do Banco de Dados"> Este comando irá criar todas as tabelas e estruturas necessárias no seu banco de dados, com base no esquema definido no Prisma.
-
-Bash
-
-npm run migrate:dev
-</Step>
-
-<Step title="6. Inicie o Servidor de Desenvolvimento"> Com tudo configurado, execute o comando abaixo para iniciar a API.
-
-Bash
-
-npm run dev
-O servidor será iniciado e a API estará pronta para receber requisições, geralmente na porta 3333. Você verá uma mensagem de confirmação no terminal. </Step> </Steps>
