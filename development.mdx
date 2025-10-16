@@ -1,94 +1,59 @@
 ---
-title: 'Development'
-description: 'Preview changes locally to update your docs'
+title: 'Instalação'
+description: 'Guia passo a passo para configurar e executar a API Hunno CRM em um ambiente de desenvolvimento local.'
 ---
 
 <Info>
-  **Prerequisites**:
-  - Node.js version 19 or higher
-  - A docs repository with a `docs.json` file
+  **Pré-requisitos**:
+  - Node.js
+  - Git instalado na sua máquina
+  - Um banco de dados PostgreSQL em execução
 </Info>
 
-Follow these steps to install and run Mintlify on your operating system.
+Siga os passos abaixo para clonar, configurar e executar o projeto localmente.
 
 <Steps>
-<Step title="Install the Mintlify CLI">
+<Step title="Clone o Repositório">
 
 ```bash
-npm i -g mint
+git clone https://github.com/marciopollo/hunnocrm-api-node
 ```
 </Step>
 
-<Step title="Preview locally">
+<Step title="Acesse o Diretório">
 
-Navigate to your docs directory where your `docs.json` file is located, and run the following command:
+Navegue até a pasta do projeto que foi criada.
 
 ```bash
-mint dev
+cd hunnocrm-api-node
 ```
-
-A local preview of your documentation will be available at `http://localhost:3000`.
-
 </Step>
 </Steps>
 
-## Custom ports
+<Step title="Instale as Dependências"> Execute o comando abaixo para instalar todas as bibliotecas e pacotes que a API necessita para funcionar.
 
-By default, Mintlify uses port 3000. You can customize the port Mintlify runs on by using the `--port` flag. For example, to run Mintlify on port 3333, use this command:
+Bash
 
-```bash
-mint dev --port 3333
-```
+npm install
+</Step>
 
-If you attempt to run Mintlify on a port that's already in use, it will use the next available port:
+<Step title="Configure as Variáveis de Ambiente"> O projeto precisa de um arquivo .env para armazenar informações sensíveis, como a conexão com o banco de dados. Copie o arquivo de exemplo para criar o seu.
 
-```md
-Port 3000 is already in use. Trying 3001 instead.
-```
+Bash
 
-## Mintlify versions
+cp .env.example .env
+Após copiar, abra o arquivo .env com um editor de texto e preencha a variável DATABASE_URL com a string de conexão do seu banco de dados PostgreSQL. </Step>
 
-Please note that each CLI release is associated with a specific version of Mintlify. If your local preview does not align with the production version, please update the CLI:
+<Step title="Execute as Migrações do Banco de Dados"> Este comando irá criar todas as tabelas e estruturas necessárias no seu banco de dados, com base no esquema definido no Prisma.
 
-```bash
-npm mint update
-```
+Bash
 
-## Validating links
+npm run migrate:dev
+</Step>
 
-The CLI can assist with validating links in your documentation. To identify any broken links, use the following command:
+<Step title="6. Inicie o Servidor de Desenvolvimento"> Com tudo configurado, execute o comando abaixo para iniciar a API.
 
-```bash
-mint broken-links
-```
+Bash
 
-## Deployment
-
-If the deployment is successful, you should see the following:
-
-<Frame>
-  <img src="/images/checks-passed.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />
-</Frame>
-
-## Code formatting
-
-We suggest using extensions on your IDE to recognize and format MDX. If you're a VSCode user, consider the [MDX VSCode extension](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx) for syntax highlighting, and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) for code formatting.
-
-## Troubleshooting
-
-<AccordionGroup>
-  <Accordion title='Error: Could not load the "sharp" module using the darwin-arm64 runtime'>
-
-    This may be due to an outdated version of node. Try the following:
-    1. Remove the currently-installed version of the CLI: `npm remove -g mint`
-    2. Upgrade to Node v19 or higher.
-    3. Reinstall the CLI: `npm i -g mint`
-  </Accordion>
-
-  <Accordion title="Issue: Encountering an unknown error">
-  
-    Solution: Go to the root of your device and delete the `~/.mintlify` folder. Then run `mint dev` again.
-  </Accordion>
-</AccordionGroup>
-
-Curious about what changed in the latest CLI version? Check out the [CLI changelog](https://www.npmjs.com/package/mintlify?activeTab=versions).
+npm run dev
+O servidor será iniciado e a API estará pronta para receber requisições, geralmente na porta 3333. Você verá uma mensagem de confirmação no terminal. </Step> </Steps>
